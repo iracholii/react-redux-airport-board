@@ -1,0 +1,9 @@
+.no-flights {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    opacity: 0.8;
+  }
+}

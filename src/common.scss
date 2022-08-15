@@ -1,0 +1,14 @@
+.button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: #1fb7ee;
+  color: #fff;
+
+  &_active {
+    background-color: #fff;
+    color: #1fb7ee;
+  }
+}

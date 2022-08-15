@@ -1,0 +1,23 @@
+.flights-table {
+  width: 100%;
+  background-color: #fff;
+  border-collapse: collapse;
+
+  &__header {
+    opacity: 0.7;
+  }
+
+  &__flights {
+    opacity: 0.9;
+  }
+
+  &__flight {
+    &_odd {
+      background-color: #e8efec;
+    }
+  }
+
+  &__element {
+    padding: 20px 40px;
+  }
+}

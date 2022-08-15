@@ -1,0 +1,90 @@
+.flights-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__direction {
+    width: 100%;
+    background-color: #1fb7ee;
+    font-size: 20px;
+    height: 60px;
+    padding-bottom: 40px;
+    border-radius: 65px 65px 0px 0px;
+  }
+
+  &__button {
+    width: 50%;
+    height: 60px;
+    border-radius: 60px 60px 0px 0px;
+
+    &:hover {
+      transition: border-radius 0.5s;
+      border-radius: 20px 20px 0px 0px;
+    }
+  }
+
+  &__icon {
+    margin: 20px;
+
+    &_departures {
+      transform: rotate(-45deg);
+    }
+
+    &_arrivals {
+      transform: rotate(45deg);
+    }
+  }
+
+  &__date {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+  }
+
+  &__date-calendar {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    align-items: center;
+  }
+
+  &__date-value {
+    font-weight: 700;
+  }
+
+  &__date-input {
+    outline: none;
+    font-size: 60px;
+    padding: 5px;
+
+    border: none;
+  }
+
+  &__date-days {
+    // width: 40%;
+  }
+
+  &__date-day {
+    border: none;
+    outline: none;
+    padding: 20px;
+    background-color: #fff;
+    cursor: pointer;
+
+    text-transform: uppercase;
+    color: #323232;
+    font-weight: 700;
+    border-bottom: 3px solid grey;
+
+    &_active {
+      border-bottom: 3px solid #1fb7ee;
+      color: #1fb7ee;
+    }
+  }
+}
+
+input::-webkit-datetime-edit {
+  display: none;
+}
