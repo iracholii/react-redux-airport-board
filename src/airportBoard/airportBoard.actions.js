@@ -47,29 +47,17 @@ export const getFilteredFlightsData = () => (dispatch, getState) => {
     } else {
       arrival = flights.body.arrival.filter((flight) => {
         return (
-          flight['airportFromID.city_en']
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          flight.airline.en.name
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          flight.codeShareData[0].codeShare
-            .toLowerCase()
-            .includes(searchValue.toLowerCase())
+          flight['airportFromID.city_en'].toLowerCase().includes(searchValue) ||
+          flight.airline.en.name.toLowerCase().includes(searchValue) ||
+          flight.codeShareData[0].codeShare.toLowerCase().includes(searchValue)
         );
       });
 
       departure = flights.body.departure.filter((flight) => {
         return (
-          flight['airportToID.city_en']
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          flight.airline.en.name
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          flight.codeShareData[0].codeShare
-            .toLowerCase()
-            .includes(searchValue.toLowerCase())
+          flight['airportToID.city_en'].toLowerCase().includes(searchValue) ||
+          flight.airline.en.name.toLowerCase().includes(searchValue) ||
+          flight.codeShareData[0].codeShare.toLowerCase().includes(searchValue)
         );
       });
     }

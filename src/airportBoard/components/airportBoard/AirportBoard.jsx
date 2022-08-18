@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route, Link, useLocation, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import qs from 'qs';
 import PropTypes from 'prop-types';
 import * as airportBoardActions from '../../airportBoard.actions';
-import FlightsSearch from '../Search/Search';
+import {
+  directionSelector,
+  dateSelector,
+  searchValueSelector,
+  arrivalFlightsSelector,
+  departureFlightsSelector,
+} from '../../airportBoard.selectors';
+import Search from '../search/Search';
 import FlightsNavigation from '../flightsNavigation/FlightsNavigation';
 import FlightsTable from '../flightsTable/FlightsTable';
 
@@ -35,7 +42,9 @@ const AirportBoard = ({
       }
     }
 
-    updatingDirection(pathname.slice(1) ? pathname.slice(1) : 'departure');
+    updatingDirection(
+      pathname.slice(1) === 'arrival' ? 'arrival' : 'departure'
+    );
   }, []);
 
   useEffect(() => {
@@ -48,18 +57,21 @@ const AirportBoard = ({
     getFilteredFlightsData();
   }, [date, searchValue]);
 
-  const flightsToRender =
-    direction === 'departure' ? departureFlights : arrivalFlights;
-
   return (
     <div className="airport-board">
-      <FlightsSearch />
+      <Search />
       <div className="flights-information">
         <FlightsNavigation />
 
         <Switch>
-          <Route path="/:flightParam">
-            <FlightsTable flights={flightsToRender} />
+          <Route path="/departure">
+            <FlightsTable flights={departureFlights} />
+          </Route>
+          <Route path="/arrival">
+            <FlightsTable flights={arrivalFlights} />
+          </Route>
+          <Route path="*">
+            <h3>Something went wrong... Please reload the page</h3>
           </Route>
         </Switch>
       </div>
@@ -69,11 +81,11 @@ const AirportBoard = ({
 
 const mapState = (state) => {
   return {
-    direction: state.airportBoard.direction,
-    date: state.airportBoard.date,
-    searchValue: state.airportBoard.searchValue,
-    arrivalFlights: state.airportBoard.flights.arrival,
-    departureFlights: state.airportBoard.flights.departure,
+    direction: directionSelector(state),
+    date: dateSelector(state),
+    searchValue: searchValueSelector(state),
+    arrivalFlights: arrivalFlightsSelector(state),
+    departureFlights: departureFlightsSelector(state),
   };
 };
 

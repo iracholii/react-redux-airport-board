@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as airportBoardActions from '../../airportBoard.actions';
 
 import './search.scss';
 
-const Search = ({ direction, date, searchValue, updatingSearchValue }) => {
-  const [inputValue, setInputValue] = useState(searchValue);
+const Search = ({ updatingSearchValue }) => {
+  const [inputValue, setInputValue] = useState('');
 
   const changeHandler = (event) => {
     setInputValue(event.target.value);
   };
 
   const searchFlightsHandler = () => {
-    updatingSearchValue(inputValue);
+    updatingSearchValue(inputValue.toLowerCase());
     setInputValue('');
   };
 
@@ -32,39 +31,22 @@ const Search = ({ direction, date, searchValue, updatingSearchValue }) => {
         />
       </div>
 
-      <Link
-        to={`/${direction}?date=${date}${
-          searchValue ? `&search=${searchValue}` : ''
-        }`}
+      <button
+        className="button flights-search__button"
+        onClick={searchFlightsHandler}
       >
-        <button
-          className="button flights-search__button"
-          onClick={searchFlightsHandler}
-        >
-          Search
-        </button>
-      </Link>
+        Search
+      </button>
     </div>
   );
-};
-
-const mapState = (state) => {
-  return {
-    direction: state.airportBoard.direction,
-    date: state.airportBoard.date,
-    searchValue: state.airportBoard.searchValue,
-  };
 };
 
 const mapDispatch = {
   updatingSearchValue: airportBoardActions.flightsSearchValueUpdated,
 };
 
-export default connect(mapState, mapDispatch)(Search);
+export default connect(null, mapDispatch)(Search);
 
 Search.propTypes = {
-  direction: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  searchValue: PropTypes.string.isRequired,
   updatingSearchValue: PropTypes.func.isRequired,
 };

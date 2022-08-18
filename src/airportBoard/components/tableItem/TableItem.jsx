@@ -33,7 +33,7 @@ const TableItem = ({ flight, index }) => {
         </span>
       </td>
       <td className="flights-table__element">
-        {moment(new Date(actual)).format('h:mm a')}
+        {moment(actual).format('h:mm a')}
       </td>
       <td className="flights-table__element">{destination}</td>
       <td className="flights-table__element">{status}</td>

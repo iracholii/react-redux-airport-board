@@ -36,11 +36,10 @@
   }
 
   &__date {
-    padding: 10px;
-    width: 100%;
     display: flex;
-
     align-items: center;
+    width: 100%;
+    padding: 10px;
   }
 
   &__date-calendar {
@@ -55,15 +54,13 @@
   }
 
   &__date-input {
-    outline: none;
     font-size: 60px;
     padding: 5px;
-
     border: none;
-  }
 
-  &__date-days {
-    // width: 40%;
+    &::-webkit-datetime-edit {
+      display: none;
+    }
   }
 
   &__date-day {
@@ -72,7 +69,6 @@
     padding: 20px;
     background-color: #fff;
     cursor: pointer;
-
     text-transform: uppercase;
     color: #323232;
     font-weight: 700;
@@ -83,8 +79,4 @@
       color: #1fb7ee;
     }
   }
-}
-
-input::-webkit-datetime-edit {
-  display: none;
 }
