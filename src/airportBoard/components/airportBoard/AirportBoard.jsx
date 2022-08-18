@@ -11,7 +11,7 @@ import {
   arrivalFlightsSelector,
   departureFlightsSelector,
 } from '../../airportBoard.selectors';
-import Search from '../search/Search';
+import FlightsSearch from '../flightsSearch/FlightsSearch';
 import FlightsNavigation from '../flightsNavigation/FlightsNavigation';
 import FlightsTable from '../flightsTable/FlightsTable';
 
@@ -59,7 +59,7 @@ const AirportBoard = ({
 
   return (
     <div className="airport-board">
-      <Search />
+      <FlightsSearch />
       <div className="flights-information">
         <FlightsNavigation />
 

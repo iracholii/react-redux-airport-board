@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as airportBoardActions from '../../airportBoard.actions';
 
-import './search.scss';
+import './flightsSearch.scss';
 
 const Search = ({ updatingSearchValue }) => {
   const [inputValue, setInputValue] = useState('');
