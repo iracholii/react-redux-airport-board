@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as airportBoardActions from '../../airportBoard.actions';
 
 import './flightsSearch.scss';
 
-const Search = ({ updatingSearchValue }) => {
+const FlightsSearch = ({ setSearchValue }) => {
   const [inputValue, setInputValue] = useState('');
 
   const changeHandler = (event) => {
@@ -13,7 +11,7 @@ const Search = ({ updatingSearchValue }) => {
   };
 
   const searchFlightsHandler = () => {
-    updatingSearchValue(inputValue.toLowerCase());
+    setSearchValue(inputValue.toLowerCase());
     setInputValue('');
   };
 
@@ -41,12 +39,8 @@ const Search = ({ updatingSearchValue }) => {
   );
 };
 
-const mapDispatch = {
-  updatingSearchValue: airportBoardActions.flightsSearchValueUpdated,
-};
+export default FlightsSearch;
 
-export default connect(null, mapDispatch)(Search);
-
-Search.propTypes = {
-  updatingSearchValue: PropTypes.func.isRequired,
+FlightsSearch.propTypes = {
+  setSearchValue: PropTypes.func.isRequired,
 };

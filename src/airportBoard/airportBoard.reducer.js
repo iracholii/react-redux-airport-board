@@ -1,19 +1,10 @@
-import moment from 'moment';
-import {
-  FLIGHTS_DATA_RECEIVED,
-  FLIGHTS_DATE,
-  FLIGHTS_DIRECTION,
-  FLIGHTS_SEARCH_VALUE,
-} from './airportBoard.actions';
+import { FLIGHTS_DATA_RECEIVED } from './airportBoard.actions';
 
 const initialState = {
   flights: {
     arrival: [],
     departure: [],
   },
-  date: moment(new Date()).format('YYYY-MM-DD'),
-  direction: '',
-  searchValue: '',
 };
 
 const airportBoardReducer = (state = initialState, action) => {
@@ -28,24 +19,6 @@ const airportBoardReducer = (state = initialState, action) => {
           arrival: action.payload.arrival,
           departure: action.payload.departure,
         },
-      };
-
-    case FLIGHTS_DATE:
-      return {
-        ...state,
-        date: action.payload.flightsDate,
-      };
-
-    case FLIGHTS_DIRECTION:
-      return {
-        ...state,
-        direction: action.payload.flightsDirection,
-      };
-
-    case FLIGHTS_SEARCH_VALUE:
-      return {
-        ...state,
-        searchValue: action.payload.flightsSearchValue,
       };
   }
 };

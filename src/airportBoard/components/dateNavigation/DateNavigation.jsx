@@ -1,33 +1,27 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import * as airportBoardActions from '../../airportBoard.actions';
-import { dateSelector } from '../../airportBoard.selectors';
 
-const DateNavigation = ({ date, updatingDate }) => {
+const DateNavigation = ({ date, setDate, setSearchValue }) => {
   const dateChangeHandler = (event) => {
-    updatingDate(event.target.value);
+    setDate(event.target.value);
+    setSearchValue('');
   };
 
   const dayButtonClickHandler = (event) => {
-    updatingDate(event.target.closest('button').dataset.day);
+    setDate(event.target.closest('button').dataset.day);
+    setSearchValue('');
   };
 
-  const yesterdayClassNames =
-    date === moment().subtract(1, 'days').format('YYYY-MM-DD')
+  const getClassNames = (day) => {
+    return date === day
       ? 'flights-navigation__date-day flights-navigation__date-day_active'
       : 'flights-navigation__date-day';
+  };
 
-  const todayClassNames =
-    date === moment().format('YYYY-MM-DD')
-      ? 'flights-navigation__date-day flights-navigation__date-day_active'
-      : 'flights-navigation__date-day';
-
-  const tomorrowClassNames =
-    date === moment().add(1, 'days').format('YYYY-MM-DD')
-      ? 'flights-navigation__date-day flights-navigation__date-day_active'
-      : 'flights-navigation__date-day';
+  const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+  const today = moment().format('YYYY-MM-DD');
+  const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 
   return (
     <div className="flights-navigation__date">
@@ -44,29 +38,29 @@ const DateNavigation = ({ date, updatingDate }) => {
 
       <div className="flights-navigation__date-days">
         <button
-          className={yesterdayClassNames}
-          data-day={moment().subtract(1, 'days').format('YYYY-MM-DD')}
+          className={getClassNames(yesterday)}
+          data-day={yesterday}
           onClick={dayButtonClickHandler}
         >
-          <div>{moment().subtract(1, 'days').format('DD/MM/YY')}</div>
+          <div>{moment(yesterday).format('DD/MM/YY')}</div>
           <div>Yesterday</div>
         </button>
 
         <button
-          className={todayClassNames}
-          data-day={moment().format('YYYY-MM-DD')}
+          className={getClassNames(today)}
+          data-day={today}
           onClick={dayButtonClickHandler}
         >
-          <div>{moment().format('DD/MM/YY')}</div>
+          <div>{moment(today).format('DD/MM/YY')}</div>
           <div>Today</div>
         </button>
 
         <button
-          className={tomorrowClassNames}
-          data-day={moment().add(1, 'days').format('YYYY-MM-DD')}
+          className={getClassNames(tomorrow)}
+          data-day={tomorrow}
           onClick={dayButtonClickHandler}
         >
-          <div>{moment().add(1, 'days').format('DD/MM/YY')}</div>
+          <div>{moment(tomorrow).format('DD/MM/YY')}</div>
           <div>Tomorrow</div>
         </button>
       </div>
@@ -74,19 +68,10 @@ const DateNavigation = ({ date, updatingDate }) => {
   );
 };
 
-const mapState = (state) => {
-  return {
-    date: dateSelector(state),
-  };
-};
-
-const mapDispatch = {
-  updatingDate: airportBoardActions.flightsDateUpdated,
-};
-
-export default connect(mapState, mapDispatch)(DateNavigation);
+export default DateNavigation;
 
 DateNavigation.propTypes = {
   date: PropTypes.string.isRequired,
-  updatingDate: PropTypes.func.isRequired,
+  setDate: PropTypes.func.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
 };
